@@ -10,6 +10,13 @@ app.set("view engine", "ejs")
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 
-mongoose.connect()
+mongoose.connect(process.env.DB_CONNECTION, {
+ useNewUrlParser: true, useUnifiedTopology:true
+},)
 
-app.listen(PORT, () => console.log(`server is running on port ${PORT}`))
+.then(() => console.log('Connected to db'))
+.catch((err) => {console.error(err); });
+
+app.listen(PORT, () => {
+    console.log(`server is running on port ${PORT}`)
+})
