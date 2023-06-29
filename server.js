@@ -3,8 +3,9 @@ const express = require("express");
 const app = express()
 const PORT = 8500;
 const mongoose = require("mongoose");
-const todotask = require('/models/todotask');
 require('dotenv').config();
+const TodoTask = require('./models/todotask')
+
 
 //set middleware
 app.set("view engine", "ejs")
@@ -23,12 +24,10 @@ app.get('/', async (req, res) => {
         TodoTask.find({}, (err, tasks) => {
             res.render('index.ejs', {todoTasks: tasks})
         })
-    } catch (err) {
-
+    } catch (err) {  
+        if (err) return res.status(500).send(err)
     }
-}
-
-)
+})
 
 app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`)
