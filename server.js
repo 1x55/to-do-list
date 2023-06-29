@@ -1,10 +1,10 @@
 //declare varibles
 const express = require("express");
-const app = express()
-const PORT = 8500;
+const app = express();
+const PORT = 8200;
 const mongoose = require("mongoose");
-require('dotenv').config();
-const TodoTask = require('./models/todotask')
+const TodoTask = require("./models/TodoTask");
+require('dotenv').config()
 
 
 //set middleware
@@ -19,15 +19,15 @@ mongoose.connect(process.env.DB_CONNECTION, {
 .then(() => console.log('Connected to db'))
 .catch((err) => {console.error(err); });
 
-app.get('/', async (req, res) => {
+
+app.get('/', async (request, response) => {
     try {
-        TodoTask.find({}, (err, tasks) => {
-            res.render('index.ejs', {todoTasks: tasks})
-        })
-    } catch (err) {  
-        if (err) return res.status(500).send(err)
+        response.render('index.ejs')
+    } catch (error) {
+        response.status(500).send({message: error.message})
     }
 })
+
 
 app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`)
