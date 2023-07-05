@@ -28,6 +28,17 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
                 <textarea cols="45" rows="6" name="content">content</textarea> 
                 <button type = "submit"><span class="fas fa-plus">Add Text</span></button>
             </form>
+
+            <ul class="todo-list">
+
+                <% todoTasks.forEach(content => {%>
+                    <li class="todo-list-item">
+                        <div class="todo-list-item">
+                            <%= content.title %> 
+                        </div>
+                    </li>
+                <% }) %>
+            </ul>
         </section>
     </section>
 
