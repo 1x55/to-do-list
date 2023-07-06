@@ -31,11 +31,18 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
 
             <ul class="todo-list">
 
-                <% todoTasks.forEach(content => {%>
+                <% todoTasks.forEach(task => {%>
                     <li class="todo-list-item">
                         <div class="todo-list-item">
-                            <%= content.title %> 
+                            <%= task.title %> 
                         </div>
+
+                        <div class="todo-list-item">
+                            <%= task.content %> 
+                        </div>
+                        <a href="/edit/<%=task._id" %>"
+                            class="edit"><span class="fas fa-edit">
+                            </span></a>  
                     </li>
                 <% }) %>
             </ul>
