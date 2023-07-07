@@ -40,11 +40,12 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
                         <div class="todo-list-item">
                             <%= task.content %> 
                         </div>
-                        <a href="/edit/<%=task._id" %>"
-                            class="edit"><span class="fas fa-edit">
-                            </span></a>  
+                        <a href="/edit/<%= task._id %>" class="edit"><span class="fas fa-edit"></span></a>
+
                     </li>
                 <% }) %>
+
+                
             </ul>
         </section>
     </section>

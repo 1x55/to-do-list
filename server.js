@@ -20,17 +20,30 @@ mongoose.connect(process.env.DB_CONNECTION, {
 .catch((err) => {console.error(err); });
 
 //GET Method
+
+// app.get('/', async (request, response) => {
+//     try {
+//         TodoTask.find({}, (err, tasks) => {
+//          response.render('index.ejs', {
+//             todoTasks: tasks
+//          })
+//         })
+//     } catch (error) {
+//         response.status(500).send({message: error.message})
+//     }
+// })
+// GET Method
 app.get('/', async (request, response) => {
     try {
-        TodoTask.find({}, (err, tasks) => {
-         response.render('index.ejs', {
-            todoTasks: tasks
-         })
-        })
+      const tasks = await TodoTask.find({});
+      response.render('index.ejs', {
+        todoTasks: tasks
+      });
     } catch (error) {
-        response.status(500).send({message: error.message})
+      response.status(500).send({ message: error.message });
     }
-})
+  });
+  
 
 //POST
 app.post('/', async (request, response) => {
