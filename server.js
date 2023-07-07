@@ -63,6 +63,34 @@ app.post('/', async (request, response) => {
     }
 })
 
+//EDIT or UPDATE METHOD
+
+app
+  .route("/edit/:id")
+  .get((request, respond) => {
+    const id = request.params.id;
+    TodoTask.find({}, (err, tasks) => {
+      respond.render('edit.ejs', {
+        todoTasks: tasks,
+        idTask: id
+      });
+    });
+  })
+  .post((request, respond) => {
+    const id = request.params.id;
+    TodoTask.findByIdAndUpdate(
+      id,
+      {
+        title: request.body.title,
+        content: request.body.content
+      },
+      err => {
+        if (err) return respond.status(500).send(err);
+        respond.redirect('/');
+      }
+    );
+  });
+
 
 app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`)
