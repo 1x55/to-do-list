@@ -95,7 +95,18 @@ app
     }
   });
 
-
+  //DELETE
+  app
+    .route("/remove/:id") 
+    .get (async(request, response) => {
+        const id = request.params.id;
+        try {
+            await TodoTask.findByIdAndRemove(id).exec();
+            response.redirect('/');
+        } catch (err) {
+            response.status(500).send(err)
+        }
+    });
 
 app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`)
