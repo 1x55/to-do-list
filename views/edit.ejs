@@ -26,35 +26,35 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
         <section class="todo">  
             <ul class="todo-list">
 
-                <% todoTasks.forEach(task => {%>
+                <% todoTasks.forEach(task => { %>
                     <% if (task._id == idTask) { %> 
                     <li class='todo-list-item'>
-                        <form action="/edit/<%= task._id%>" 
-                        method = "POST"> 
-                        <input type="text" name="title" value = "<%=task.title %>">
-                        <textarea cols="45" rows="6" name ="content"><%=task.content %></textarea> 
+                        <form action="/edit/<%= task._id %>" 
+                        method="POST"> 
+                        <input type="text" name="title" value="<%= task.title %>">
+                        <textarea cols="45" rows="6" name="content"><%= task.content %></textarea> 
                         <button type="submit" class="confirm">Confirm</button>
-                        <a href="/" class= "cancel">Cancel</a>
+                        <a href="/" class="cancel">Cancel</a>
                     </form>
-                    </li>                        
-                    <li class="todo-list-item">
-                        <div class="todo-list-item">
-                            <%= task.title %> 
-                        </div>
-
-                        <div class="todo-list-item">
-                            <%= task.content %> 
-                        </div>
-                        <a href="/edit/<%= task._id %>" class="edit"><span class="fas fa-edit"></span></a>
-
-                        <a href="/remove/<%= task._id %>" class="remove"><span class="fas fa-times"></span></a>
-                    </li>
-                <% }) %>
-
-                
+                    </li>        
+                      
+                    <% } else { %>
+                                <li class="todo-list-item">
+                                    <div class="todo-list-item">
+                                        <%= task.title %> 
+                                    </div>
+            
+                                    <div class="todo-list-item">
+                                        <%= task.content %> 
+                                    </div>
+                                    <a href="/edit/<%= task._id %>" class="edit"><span class="fas fa-edit"></span></a>
+            
+                                    <a href="/remove/<%= task._id %>" class="remove"><span class="fas fa-times"></span></a>
+                                </li>
+                            <% } %>
+                <% }) %>        
             </ul>
         </section>
     </section>
-
 </body>
 </html>

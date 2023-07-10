@@ -67,29 +67,34 @@ app.post('/', async (request, response) => {
 
 app
   .route("/edit/:id")
-  .get((request, respond) => {
+  .get(async (request, respond) => {
     const id = request.params.id;
-    TodoTask.find({}, (err, tasks) => {
+    try {
+      const tasks = await TodoTask.find({}).exec();
       respond.render('edit.ejs', {
         todoTasks: tasks,
         idTask: id
       });
-    });
+    } catch (err) {
+      respond.status(500).send(err);
+    }
   })
-  .post((request, respond) => {
+  .post(async (request, respond) => {
     const id = request.params.id;
-    TodoTask.findByIdAndUpdate(
-      id,
-      {
-        title: request.body.title,
-        content: request.body.content
-      },
-      err => {
-        if (err) return respond.status(500).send(err);
-        respond.redirect('/');
-      }
-    );
+    try {
+      await TodoTask.findByIdAndUpdate(
+        id,
+        {
+          title: request.body.title,
+          content: request.body.content
+        }
+      ).exec();
+      respond.redirect('/');
+    } catch (err) {
+      respond.status(500).send(err);
+    }
   });
+
 
 
 app.listen(PORT, () => {
